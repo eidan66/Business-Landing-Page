@@ -1,34 +1,37 @@
 import { motion } from 'framer-motion';
 import { TrendingDown, DollarSign, Target, AlertCircle } from 'lucide-react';
+import { useLanguage } from '@/contexts/LanguageContext';
 
 export default function PainPoints() {
+  const { language, t } = useLanguage();
+
   const painPoints = [
     {
       icon: TrendingDown,
-      title: "Not getting enough leads?",
-      description: "Your marketing isn't converting prospects into customers"
+      title: t('painpoints.leads.title'),
+      description: t('painpoints.leads.description')
     },
     {
       icon: DollarSign,
-      title: "Sales feel stuck?",
-      description: "Revenue has plateaued and growth seems impossible"
+      title: t('painpoints.sales.title'),
+      description: t('painpoints.sales.description')
     },
     {
       icon: Target,
-      title: "Unclear marketing direction?",
-      description: "You're throwing money at ads with no clear strategy"
+      title: t('painpoints.marketing.title'),
+      description: t('painpoints.marketing.description')
     }
   ];
 
   return (
-    <section className="py-20 bg-slate-900 relative overflow-hidden">
+    <section className="py-20 bg-slate-900 relative overflow-hidden" dir={language === 'he' ? 'rtl' : 'ltr'}>
       {/* Background decoration */}
       <div className="absolute inset-0">
         <div className="absolute top-20 left-10 w-32 h-32 bg-red-500 rounded-full opacity-10 blur-2xl" />
         <div className="absolute bottom-20 right-10 w-40 h-40 bg-red-400 rounded-full opacity-10 blur-2xl" />
       </div>
 
-      <div className="relative z-10 max-w-6xl mx-auto px-6">
+      <div className="relative z-10 max-w-screen-xl mx-auto px-6">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -38,13 +41,13 @@ export default function PainPoints() {
         >
           <div className="inline-flex items-center space-x-2 bg-red-500/10 text-red-400 px-4 py-2 rounded-full mb-4">
             <AlertCircle className="w-4 h-4" />
-            <span className="text-sm font-medium">Common Business Challenges</span>
+            <span className="text-sm font-medium">{t('painpoints.tag')}</span>
           </div>
           <h2 className="text-4xl lg:text-5xl font-bold text-white mb-6">
-            Struggling with any of these?
+            {t('painpoints.headline')}
           </h2>
           <p className="text-xl text-slate-300 max-w-2xl mx-auto">
-            You're not alone. These are the most common roadblocks holding businesses back from their potential.
+            {t('painpoints.subheadline')}
           </p>
         </motion.div>
 
@@ -84,7 +87,7 @@ export default function PainPoints() {
           className="text-center mt-16"
         >
           <p className="text-slate-300 text-lg mb-4">
-            Sound familiar? Let's change that.
+            {t('painpoints.cta')}
           </p>
           <div className="w-24 h-1 bg-gradient-to-r from-red-500 to-emerald-500 mx-auto rounded-full" />
         </motion.div>

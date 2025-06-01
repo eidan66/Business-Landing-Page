@@ -2,10 +2,12 @@ import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Button } from '@/components/ui/button';
 import { Calendar, X } from 'lucide-react';
+import { useLanguage } from '@/contexts/LanguageContext';
 
 export default function StickyButton() {
   const [isVisible, setIsVisible] = useState(false);
   const [isHidden, setIsHidden] = useState(false);
+  const { language, t } = useLanguage();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -36,12 +38,13 @@ export default function StickyButton() {
             animate={{ y: 0 }}
             exit={{ y: 100 }}
             transition={{ type: "spring", stiffness: 100, damping: 20 }}
-            className="fixed bottom-0 left-0 right-0 z-50 md:hidden bg-white border-t border-slate-200 p-4 shadow-lg"
+            className="fixed bottom-0 left-0 right-0 z-50 md:hidden bg-white border-t border-slate-200 px-6 py-4 shadow-lg"
+            dir={language === 'he' ? 'rtl' : 'ltr'}
           >
             <div className="flex items-center justify-between">
               <div>
-                <p className="font-semibold text-slate-900">Ready to grow?</p>
-                <p className="text-sm text-slate-600">Book your free call</p>
+                <p className="font-semibold text-slate-900">{t('sticky.button.mobile.title')}</p>
+                <p className="text-sm text-slate-600">{t('sticky.button.mobile.subtitle')}</p>
               </div>
               <div className="flex items-center space-x-2">
                 <Button
@@ -57,7 +60,7 @@ export default function StickyButton() {
                   className="bg-emerald-600 hover:bg-emerald-700 text-white px-6"
                 >
                   <Calendar className="w-4 h-4 mr-2" />
-                  Book Call
+                  {t('sticky.button.mobile.cta')}
                 </Button>
               </div>
             </div>

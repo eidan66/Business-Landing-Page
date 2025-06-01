@@ -1,4 +1,3 @@
-import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { CheckCircle, TrendingUp, Users, BarChart3, Target, Lightbulb, DollarSign } from 'lucide-react';
 import {
@@ -6,56 +5,89 @@ import {
   HoverCardContent,
   HoverCardTrigger,
 } from "@/components/ui/hover-card";
+import { useLanguage } from '@/contexts/LanguageContext';
 
 export default function Solutions() {
+  const { language, t } = useLanguage();
+
   const solutions = [
     {
       icon: Target,
-      title: "Strategic Marketing Plan",
-      description: "Custom roadmap to reach your ideal customers",
-      details: "We'll analyze your market, competitors, and create a step-by-step marketing strategy that actually converts prospects into paying customers.",
-      benefits: ["Market analysis", "Competitor research", "Customer personas", "Content strategy"]
+      title: t('solutions.marketing.title'),
+      description: t('solutions.marketing.description'),
+      details: t('solutions.marketing.details'),
+      benefits: [
+        t('solutions.marketing.benefits.market_analysis'),
+        t('solutions.marketing.benefits.competitor_research'),
+        t('solutions.marketing.benefits.customer_personas'),
+        t('solutions.marketing.benefits.content_strategy')
+      ]
     },
     {
       icon: TrendingUp,
-      title: "Sales Funnel Optimization",
-      description: "Turn more visitors into paying customers",
-      details: "Identify bottlenecks in your sales process and implement proven systems that guide prospects smoothly from awareness to purchase.",
-      benefits: ["Conversion tracking", "Process automation", "Lead nurturing", "Sales scripts"]
+      title: t('solutions.sales_funnel.title'),
+      description: t('solutions.sales_funnel.description'),
+      details: t('solutions.sales_funnel.details'),
+      benefits: [
+        t('solutions.sales_funnel.benefits.conversion_tracking'),
+        t('solutions.sales_funnel.benefits.process_automation'),
+        t('solutions.sales_funnel.benefits.lead_nurturing'),
+        t('solutions.sales_funnel.benefits.sales_scripts')
+      ]
     },
     {
       icon: BarChart3,
-      title: "Revenue Growth Analysis",
-      description: "Find hidden profit opportunities in your business",
-      details: "Deep dive into your numbers to uncover revenue leaks, pricing optimization opportunities, and new income streams you might be missing.",
-      benefits: ["Financial audit", "Pricing strategy", "Cost optimization", "Growth forecasting"]
+      title: t('solutions.revenue_growth.title'),
+      description: t('solutions.revenue_growth.description'),
+      details: t('solutions.revenue_growth.details'),
+      benefits: [
+        t('solutions.revenue_growth.benefits.financial_audit'),
+        t('solutions.revenue_growth.benefits.pricing_strategy'),
+        t('solutions.revenue_growth.benefits.cost_optimization'),
+        t('solutions.revenue_growth.benefits.growth_forecasting')
+      ]
     },
     {
       icon: Users,
-      title: "Team & Operations Scaling",
-      description: "Build systems that work without you",
-      details: "Create processes and hire the right people so your business can grow while giving you more freedom and less stress.",
-      benefits: ["SOPs creation", "Hiring strategy", "Team training", "Workflow automation"]
+      title: t('solutions.team_operations.title'),
+      description: t('solutions.team_operations.description'),
+      details: t('solutions.team_operations.details'),
+      benefits: [
+        t('solutions.team_operations.benefits.sops_creation'),
+        t('solutions.team_operations.benefits.hiring_strategy'),
+        t('solutions.team_operations.benefits.team_training'),
+        t('solutions.team_operations.benefits.workflow_automation')
+      ]
     },
     {
       icon: Lightbulb,
-      title: "Digital Transformation",
-      description: "Modernize your business for competitive advantage",
-      details: "Implement technology solutions that streamline operations, improve customer experience, and position you ahead of competitors.",
-      benefits: ["Tech stack audit", "Automation tools", "CRM setup", "Digital presence"]
+      title: t('solutions.digital_transformation.title'),
+      description: t('solutions.digital_transformation.description'),
+      details: t('solutions.digital_transformation.details'),
+      benefits: [
+        t('solutions.digital_transformation.benefits.tech_stack_audit'),
+        t('solutions.digital_transformation.benefits.automation_tools'),
+        t('solutions.digital_transformation.benefits.crm_setup'),
+        t('solutions.digital_transformation.benefits.digital_presence')
+      ]
     },
     {
       icon: DollarSign,
-      title: "Cash Flow Management",
-      description: "Ensure healthy finances and sustainable growth",
-      details: "Optimize your cash flow, reduce unnecessary expenses, and create financial systems that support long-term business stability.",
-      benefits: ["Cash flow forecasting", "Expense optimization", "Financial planning", "Investment strategy"]
+      title: t('solutions.cash_flow.title'),
+      description: t('solutions.cash_flow.description'),
+      details: t('solutions.cash_flow.details'),
+      benefits: [
+        t('solutions.cash_flow.benefits.cash_flow_forecasting'),
+        t('solutions.cash_flow.benefits.expense_optimization'),
+        t('solutions.cash_flow.benefits.financial_planning'),
+        t('solutions.cash_flow.benefits.investment_strategy')
+      ]
     }
   ];
 
   return (
-    <section className="py-20 bg-gradient-to-b from-white to-slate-50">
-      <div className="max-w-6xl mx-auto px-6">
+    <section className="py-20 bg-gradient-to-b from-white to-slate-50" dir={language === 'he' ? 'rtl' : 'ltr'}>
+      <div className="max-w-screen-xl mx-auto px-6">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -65,13 +97,13 @@ export default function Solutions() {
         >
           <div className="inline-flex items-center space-x-2 bg-emerald-500/10 text-emerald-600 px-4 py-2 rounded-full mb-4">
             <CheckCircle className="w-4 h-4" />
-            <span className="text-sm font-medium">Our Solutions</span>
+            <span className="text-sm font-medium">{t('solutions.tag')}</span>
           </div>
           <h2 className="text-4xl lg:text-5xl font-bold text-slate-900 mb-6">
-            We Help You With:
+            {t('solutions.headline')}
           </h2>
           <p className="text-xl text-slate-600 max-w-2xl mx-auto">
-            Comprehensive business consulting services designed to unlock your company's full potential.
+            {t('solutions.subheadline')}
           </p>
         </motion.div>
 
@@ -101,17 +133,17 @@ export default function Solutions() {
                     </p>
 
                     <div className="text-sm text-emerald-600 font-medium">
-                      Hover for details →
+                      {t('solutions.hover_details')}
                     </div>
                   </div>
                 </HoverCardTrigger>
-                <HoverCardContent className="w-80 p-6">
+                <HoverCardContent className="w-80 p-6" dir={language === 'he' ? 'rtl' : 'ltr'}>
                   <h4 className="font-bold text-slate-900 mb-3">{solution.title}</h4>
                   <p className="text-slate-600 mb-4 text-sm leading-relaxed">
                     {solution.details}
                   </p>
                   <div className="space-y-2">
-                    <p className="text-sm font-medium text-slate-700">What's included:</p>
+                    <p className="text-sm font-medium text-slate-700">{t('solutions.whats_included')}</p>
                     <ul className="space-y-1">
                       {solution.benefits.map((benefit, idx) => (
                         <li key={idx} className="flex items-center space-x-2 text-sm text-slate-600">
@@ -136,10 +168,10 @@ export default function Solutions() {
         >
           <div className="bg-slate-50 rounded-2xl p-8 border border-slate-200">
             <h3 className="text-2xl font-bold text-slate-900 mb-4">
-              Not sure which solution fits your needs?
+              {t('solutions.not_sure.headline')}
             </h3>
             <p className="text-slate-600 mb-6">
-              That's exactly what we'll figure out together on our free strategy call.
+              {t('solutions.not_sure.subheadline')}
             </p>
             <div className="w-32 h-1 bg-gradient-to-r from-emerald-500 to-blue-500 mx-auto rounded-full" />
           </div>

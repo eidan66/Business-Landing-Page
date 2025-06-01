@@ -2,37 +2,39 @@ import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Star, Quote, ChevronLeft, ChevronRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { useLanguage } from '@/contexts/LanguageContext';
 
 export default function Testimonials() {
   const [currentIndex, setCurrentIndex] = useState(0);
+  const { language, t } = useLanguage();
 
   const testimonials = [
     {
       name: "Sarah Johnson",
       title: "CEO",
       company: "TechStart Solutions",
-      image: "https://images.unsplash.com/photo-1494790108755-2616b612b786?w=80&h=80&fit=crop&crop=face",
+      image: "https://i.pravatar.cc/250?img=40",
       rating: 5,
-      quote: "Danny's strategic insights transformed our business completely. We went from struggling to get leads to having a consistent pipeline of qualified prospects. Revenue increased 120% in just 8 months.",
-      results: "120% revenue increase"
+      quote: t('testimonials.sarah.quote'),
+      results: t('testimonials.sarah.results')
     },
     {
       name: "Michael Chen",
       title: "Founder", 
       company: "GrowthLab Marketing",
-      image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=80&h=80&fit=crop&crop=face",
+      image: "https://i.pravatar.cc/250?img=52",
       rating: 5,
-      quote: "The sales funnel optimization was a game-changer. Our conversion rate doubled, and we finally have systems that work without constant babysitting. Best investment we've made.",
-      results: "200% conversion increase"
+      quote: t('testimonials.michael.quote'),
+      results: t('testimonials.michael.results')
     },
     {
       name: "Emma Rodriguez",
       title: "Owner",
       company: "Artisan Bakery Co.",
-      image: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=80&h=80&fit=crop&crop=face",
+      image: "https://i.pravatar.cc/250?img=38",
       rating: 5,
-      quote: "I was overwhelmed trying to manage everything myself. Danny helped me build a team and create processes that let me focus on what I love while the business runs smoothly.",
-      results: "3x team productivity"
+      quote: t('testimonials.emma.quote'),
+      results: t('testimonials.emma.results')
     }
   ];
 
@@ -55,14 +57,14 @@ export default function Testimonials() {
   const currentTestimonial = testimonials[currentIndex];
 
   return (
-    <section className="py-20 bg-gradient-to-b from-slate-50 to-white relative overflow-hidden">
+    <section className="py-20 bg-gradient-to-b from-slate-50 to-white relative overflow-hidden" dir={language === 'he' ? 'rtl' : 'ltr'}>
       {/* Background decoration */}
       <div className="absolute inset-0">
         <div className="absolute top-20 right-20 w-40 h-40 bg-yellow-200 rounded-full opacity-20 blur-3xl" />
         <div className="absolute bottom-20 left-20 w-32 h-32 bg-blue-200 rounded-full opacity-20 blur-3xl" />
       </div>
 
-      <div className="relative z-10 max-w-4xl mx-auto px-6">
+      <div className="relative z-10 max-w-screen-lg mx-auto px-6">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -72,13 +74,13 @@ export default function Testimonials() {
         >
           <div className="inline-flex items-center space-x-2 bg-yellow-500/10 text-yellow-600 px-4 py-2 rounded-full mb-4">
             <Star className="w-4 h-4" />
-            <span className="text-sm font-medium">Client Success Stories</span>
+            <span className="text-sm font-medium">{t('testimonials.tag')}</span>
           </div>
           <h2 className="text-4xl lg:text-5xl font-bold text-slate-900 mb-6">
-            What Our Clients Say
+            {t('testimonials.headline')}
           </h2>
           <p className="text-xl text-slate-600">
-            Real results from real businesses that took action
+            {t('testimonials.subheadline')}
           </p>
         </motion.div>
 
@@ -86,9 +88,9 @@ export default function Testimonials() {
           <AnimatePresence mode="wait">
             <motion.div
               key={currentIndex}
-              initial={{ opacity: 0, x: 50 }}
+              initial={{ opacity: 0, x: language === 'he' ? -50 : 50 }}
               animate={{ opacity: 1, x: 0 }}
-              exit={{ opacity: 0, x: -50 }}
+              exit={{ opacity: 0, x: language === 'he' ? 50 : -50 }}
               transition={{ duration: 0.5, ease: "easeInOut" }}
               className="bg-white rounded-3xl p-12 shadow-2xl border border-slate-100"
             >
@@ -139,7 +141,7 @@ export default function Testimonials() {
               onClick={prevTestimonial}
               className="w-12 h-12 rounded-full border-slate-200 hover:bg-slate-50"
             >
-              <ChevronLeft className="w-5 h-5" />
+              {language === 'he' ? <ChevronRight className="w-5 h-5" /> : <ChevronLeft className="w-5 h-5" />}
             </Button>
             <Button
               variant="outline"
@@ -147,7 +149,7 @@ export default function Testimonials() {
               onClick={nextTestimonial}
               className="w-12 h-12 rounded-full border-slate-200 hover:bg-slate-50"
             >
-              <ChevronRight className="w-5 h-5" />
+              {language === 'he' ? <ChevronLeft className="w-5 h-5" /> : <ChevronRight className="w-5 h-5" />}
             </Button>
           </div>
 

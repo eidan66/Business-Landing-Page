@@ -1,13 +1,14 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Calendar, ArrowRight, CheckCircle } from 'lucide-react';
-
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Lead, LeadSource } from '@/entities/Lead';
+import { Calendar, ArrowRight, CheckCircle } from 'lucide-react';
+import { useLanguage } from '@/contexts/LanguageContext'; // Updated import path
 
 export default function Hero() {
+  const { t, language } = useLanguage(); // Use the language hook
   const [formData, setFormData] = useState({
     full_name: '',
     email: '',
@@ -48,12 +49,12 @@ export default function Hero() {
           <div className="w-20 h-20 bg-emerald-500 rounded-full flex items-center justify-center mx-auto mb-6">
             <CheckCircle className="w-10 h-10 text-white" />
           </div>
-          <h2 className="text-3xl font-bold text-slate-900 mb-4">Thank You!</h2>
+          <h2 className="text-3xl font-bold text-slate-900 mb-4">{t('hero.submitted.title')}</h2>
           <p className="text-lg text-slate-600 mb-6">
-            We've received your information and will contact you within 24 hours to schedule your free strategy call.
+            {t('hero.submitted.message')}
           </p>
           <p className="text-sm text-slate-500">
-            Check your email for confirmation details.
+            {t('hero.submitted.emailCta')}
           </p>
         </motion.div>
       </section>
@@ -61,19 +62,19 @@ export default function Hero() {
   }
 
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-slate-50 via-white to-slate-100">
+    <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-slate-50 via-white to-slate-100" dir={language === 'he' ? 'rtl' : 'ltr'}>
       {/* Background decoration */}
       <div className="absolute inset-0 overflow-hidden">
-        <div className="absolute -top-40 -right-40 w-80 h-80 bg-emerald-100 rounded-full opacity-30 blur-3xl" />
-        <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-blue-100 rounded-full opacity-30 blur-3xl" />
+        <div className="absolute -top-40 -right-40 w-90 h-90 bg-emerald-100 rounded-full opacity-30 blur-3xl" />
+        <div className="absolute -bottom-40 -left-40 w-90 h-90 bg-blue-100 rounded-full opacity-30 blur-3xl" />
       </div>
 
-      <div className="relative z-10 mx-auto px-6 py-12">
+      <div className="relative z-10 max-w-screen-xl mx-auto px-6 py-12 pt-24 md:pt-12"> {/* Added pt-24 for navbar */}
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           
           {/* Left side - Content */}
           <motion.div
-            initial={{ opacity: 0, x: -50 }}
+            initial={{ opacity: 0, x: language === 'he' ? -50 : 50 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8, ease: "easeOut" }}
             className="lg:pr-8"
@@ -84,9 +85,9 @@ export default function Hero() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.2, duration: 0.8 }}
             >
-              Your business deserves to{' '}
+              {t('hero.headline.main')}{' '}
               <span className="text-emerald-600 relative">
-                grow
+                {t('hero.headline.highlight')}
                 <motion.div
                   className="absolute bottom-0 left-0 w-full h-1 bg-emerald-200"
                   initial={{ scaleX: 0 }}
@@ -102,7 +103,7 @@ export default function Hero() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.4, duration: 0.8 }}
             >
-              One short meeting can bring you clarity, direction, and a real plan of action
+              {t('hero.subheadline')}
             </motion.p>
 
             {/* Key benefits */}
@@ -113,9 +114,9 @@ export default function Hero() {
               transition={{ delay: 0.6, duration: 0.8 }}
             >
               {[
-                '30-minute free consultation',
-                'Personalized growth strategy',
-                'No obligation, no sales pitch'
+                t('hero.benefit1'),
+                t('hero.benefit2'),
+                t('hero.benefit3')
               ].map((benefit, index) => (
                 <div key={index} className="flex items-center space-x-3">
                   <div className="w-5 h-5 bg-emerald-500 rounded-full flex items-center justify-center">
@@ -129,7 +130,7 @@ export default function Hero() {
 
           {/* Right side - Form */}
           <motion.div
-            initial={{ opacity: 0, x: 50 }}
+            initial={{ opacity: 0, x: language === 'he' ? 50 : -50 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8, delay: 0.3, ease: "easeOut" }}
             className="relative"
@@ -137,44 +138,44 @@ export default function Hero() {
             <div className="bg-white rounded-2xl shadow-2xl p-8 border border-slate-100">
               <div className="text-center mb-6">
                 <Calendar className="w-8 h-8 text-emerald-600 mx-auto mb-3" />
-                <h3 className="text-2xl font-bold text-slate-900 mb-2">Schedule Your Free Call</h3>
-                <p className="text-slate-600">Get started in under 60 seconds</p>
+                <h3 className="text-2xl font-bold text-slate-900 mb-2">{t('hero.form.title')}</h3>
+                <p className="text-slate-600">{t('hero.form.subtitle')}</p>
               </div>
 
               <form onSubmit={handleSubmit} className="space-y-6">
                 <div>
-                  <Label htmlFor="full_name" className="text-slate-700 font-medium">Full Name *</Label>
+                  <Label htmlFor="full_name" className="text-slate-700 font-medium">{t('hero.form.nameLabel')}</Label>
                   <Input
                     id="full_name"
                     value={formData.full_name}
                     onChange={(e) => handleInputChange('full_name', e.target.value)}
-                    placeholder="John Smith"
+                    placeholder={t('hero.form.namePlaceholder')}
                     required
                     className="mt-2 h-12 border-slate-200 focus:border-emerald-500 focus:ring-emerald-500"
                   />
                 </div>
 
                 <div>
-                  <Label htmlFor="email" className="text-slate-700 font-medium">Email Address *</Label>
+                  <Label htmlFor="email" className="text-slate-700 font-medium">{t('hero.form.emailLabel')}</Label>
                   <Input
                     id="email"
                     type="email"
                     value={formData.email}
                     onChange={(e) => handleInputChange('email', e.target.value)}
-                    placeholder="john@company.com"
+                    placeholder={t('hero.form.emailPlaceholder')}
                     required
                     className="mt-2 h-12 border-slate-200 focus:border-emerald-500 focus:ring-emerald-500"
                   />
                 </div>
 
                 <div>
-                  <Label htmlFor="phone" className="text-slate-700 font-medium">Phone Number</Label>
+                  <Label htmlFor="phone" className="text-slate-700 font-medium">{t('hero.form.phoneLabel')}</Label>
                   <Input
                     id="phone"
                     type="tel"
                     value={formData.phone}
                     onChange={(e) => handleInputChange('phone', e.target.value)}
-                    placeholder="+1 (555) 123-4567"
+                    placeholder={t('hero.form.phonePlaceholder')}
                     className="mt-2 h-12 border-slate-200 focus:border-emerald-500 focus:ring-emerald-500"
                   />
                 </div>
@@ -187,11 +188,11 @@ export default function Hero() {
                   {isSubmitting ? (
                     <div className="flex items-center space-x-2">
                       <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin" />
-                      <span>Scheduling...</span>
+                      <span>{t('hero.form.submitting')}</span>
                     </div>
                   ) : (
                     <div className="flex items-center space-x-2">
-                      <span>Schedule Your Free Call</span>
+                      <span>{t('hero.form.button')}</span>
                       <ArrowRight className="w-5 h-5" />
                     </div>
                   )}
@@ -199,7 +200,7 @@ export default function Hero() {
               </form>
 
               <p className="text-xs text-slate-500 text-center mt-4">
-                We respect your privacy. No spam, ever.
+                {t('hero.form.privacy')}
               </p>
             </div>
           </motion.div>

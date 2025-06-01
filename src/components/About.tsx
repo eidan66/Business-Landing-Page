@@ -1,38 +1,41 @@
 import { motion } from 'framer-motion';
 import { Award, Users, TrendingUp, Clock } from 'lucide-react';
+import { useLanguage } from '@/contexts/LanguageContext';
 
 export default function About() {
+  const { language, t } = useLanguage();
+
   const stats = [
     {
       icon: Users,
       number: "300+",
-      label: "Businesses Helped"
+      label: t('about.stats.businesses_helped')
     },
     {
       icon: TrendingUp,
       number: "85%",
-      label: "Average Revenue Increase"
+      label: t('about.stats.revenue_increase')
     },
     {
       icon: Clock,
       number: "12+",
-      label: "Years Experience"
+      label: t('about.stats.years_experience')
     },
     {
       icon: Award,
       number: "98%",
-      label: "Client Satisfaction"
+      label: t('about.stats.client_satisfaction')
     }
   ];
 
   return (
-    <section className="py-20 bg-white">
-      <div className="max-w-6xl mx-auto px-6">
+    <section className="py-20 bg-white" dir={language === 'he' ? 'rtl' : 'ltr'}>
+      <div className="max-w-screen-xl mx-auto px-6">
         <div className="grid lg:grid-cols-2 gap-16 items-center">
           
           {/* Left side - Image */}
           <motion.div
-            initial={{ opacity: 0, x: -50 }}
+            initial={{ opacity: 0, x: language === 'he' ? 50 : -50 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
@@ -41,7 +44,7 @@ export default function About() {
             <div className="relative overflow-hidden rounded-2xl">
               <img
                 src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=500&h=600&fit=crop&crop=face"
-                alt="Danny Cohen - Business Consultant"
+                alt={t('about.image_alt')}
                 className="w-full h-[600px] object-cover"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-slate-900/20 to-transparent" />
@@ -71,23 +74,23 @@ export default function About() {
 
           {/* Right side - Content */}
           <motion.div
-            initial={{ opacity: 0, x: 50 }}
-            whileInView={{ opacity: 1, x: 0 }}
+            initial={{ opacity: 0, x: language === 'he' ? -50 : 50 }}
+            whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8, delay: 0.2 }}
             className="lg:pl-8"
           >
             <div className="inline-flex items-center space-x-2 bg-blue-500/10 text-blue-600 px-4 py-2 rounded-full mb-6">
               <Award className="w-4 h-4" />
-              <span className="text-sm font-medium">Meet Your Consultant</span>
+              <span className="text-sm font-medium">{t('about.tag')}</span>
             </div>
 
             <h2 className="text-4xl lg:text-5xl font-bold text-slate-900 mb-6">
-              Danny Cohen
+              {t('about.name')}
             </h2>
 
             <p className="text-xl text-slate-600 mb-8 leading-relaxed">
-              Business consultant with 12+ years of experience helping small and medium businesses scale their revenue and streamline their operations.
+              {t('about.description')}
             </p>
 
             <div className="space-y-6 mb-8">
@@ -96,8 +99,8 @@ export default function About() {
                   <div className="w-2 h-2 bg-white rounded-full" />
                 </div>
                 <div>
-                  <h4 className="font-semibold text-slate-900 mb-1">Strategic Growth Expert</h4>
-                  <p className="text-slate-600">Specialized in identifying and eliminating growth bottlenecks that keep businesses stuck.</p>
+                  <h4 className="font-semibold text-slate-900 mb-1">{t('about.expertises.strategic_growth.title')}</h4>
+                  <p className="text-slate-600">{t('about.expertises.strategic_growth.description')}</p>
                 </div>
               </div>
 
@@ -106,8 +109,8 @@ export default function About() {
                   <div className="w-2 h-2 bg-white rounded-full" />
                 </div>
                 <div>
-                  <h4 className="font-semibold text-slate-900 mb-1">Proven Track Record</h4>
-                  <p className="text-slate-600">Helped over 300 businesses increase their revenue by an average of 85% within 12 months.</p>
+                  <h4 className="font-semibold text-slate-900 mb-1">{t('about.expertises.proven_track_record.title')}</h4>
+                  <p className="text-slate-600">{t('about.expertises.proven_track_record.description')}</p>
                 </div>
               </div>
 
@@ -116,8 +119,8 @@ export default function About() {
                   <div className="w-2 h-2 bg-white rounded-full" />
                 </div>
                 <div>
-                  <h4 className="font-semibold text-slate-900 mb-1">Industry Recognition</h4>
-                  <p className="text-slate-600">Featured in Forbes, Entrepreneur Magazine, and recognized as Top Business Consultant 2023.</p>
+                  <h4 className="font-semibold text-slate-900 mb-1">{t('about.expertises.industry_recognition.title')}</h4>
+                  <p className="text-slate-600">{t('about.expertises.industry_recognition.description')}</p>
                 </div>
               </div>
             </div>
@@ -125,11 +128,10 @@ export default function About() {
             <div className="bg-slate-50 rounded-xl p-6 border border-slate-200">
               <div className="flex items-center space-x-3 mb-3">
                 <div className="w-3 h-3 bg-emerald-500 rounded-full" />
-                <span className="font-semibold text-slate-900">My Commitment to You</span>
+                <span className="font-semibold text-slate-900">{t('about.commitment.title')}</span>
               </div>
               <p className="text-slate-600 italic">
-                "I believe every business has untapped potential. My job is to help you find it, 
-                plan for it, and achieve it faster than you thought possible."
+                {t('about.commitment.quote')}
               </p>
             </div>
           </motion.div>
