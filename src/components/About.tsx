@@ -30,7 +30,7 @@ export default function About() {
 
   return (
     <section className="py-20 bg-white" dir={language === 'he' ? 'rtl' : 'ltr'}>
-      <div className="max-w-screen-xl mx-auto px-6">
+      <div className="max-w-screen-2xl mx-auto px-6">
         <div className="grid lg:grid-cols-2 gap-16 items-center">
           
           {/* Left side - Image */}

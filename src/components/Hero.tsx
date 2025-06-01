@@ -69,7 +69,7 @@ export default function Hero() {
         <div className="absolute -bottom-40 -left-40 w-90 h-90 bg-blue-100 rounded-full opacity-30 blur-3xl" />
       </div>
 
-      <div className="relative z-10 max-w-screen-xl mx-auto px-6 py-12 pt-24 md:pt-12"> {/* Added pt-24 for navbar */}
+      <div className="relative z-10 max-w-screen-2xl mx-auto px-6 py-12 pt-24 md:pt-12"> {/* Added pt-24 for navbar */}
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           
           {/* Left side - Content */}

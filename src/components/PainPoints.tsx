@@ -31,7 +31,7 @@ export default function PainPoints() {
         <div className="absolute bottom-20 right-10 w-40 h-40 bg-red-400 rounded-full opacity-10 blur-2xl" />
       </div>
 
-      <div className="relative z-10 max-w-screen-xl mx-auto px-6">
+      <div className="relative z-10 max-w-screen-2xl mx-auto px-6">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}

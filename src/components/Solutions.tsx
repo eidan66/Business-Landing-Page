@@ -87,7 +87,7 @@ export default function Solutions() {
 
   return (
     <section className="py-20 bg-gradient-to-b from-white to-slate-50" dir={language === 'he' ? 'rtl' : 'ltr'}>
-      <div className="max-w-screen-xl mx-auto px-6">
+      <div className="max-w-screen-2xl mx-auto px-6">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}

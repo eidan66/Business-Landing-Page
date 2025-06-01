@@ -64,7 +64,7 @@ export default function Testimonials() {
         <div className="absolute bottom-20 left-20 w-32 h-32 bg-blue-200 rounded-full opacity-20 blur-3xl" />
       </div>
 
-      <div className="relative z-10 max-w-screen-lg mx-auto px-6">
+      <div className="relative z-10 max-w-screen-2xl mx-auto px-6">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}

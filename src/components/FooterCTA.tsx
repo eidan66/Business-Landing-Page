@@ -48,7 +48,7 @@ export default function FooterCTA() {
           <div className="absolute bottom-20 right-20 w-32 h-32 bg-blue-500 rounded-full opacity-10 blur-3xl" />
         </div>
 
-        <div className="relative z-10 max-w-screen-xl mx-auto px-6">
+        <div className="relative z-10 max-w-screen-2xl mx-auto px-6">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             
             {/* Left side - CTA Content */}
